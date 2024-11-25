@@ -1,4 +1,12 @@
 node_modules
 .idea
 cypress/downloads
+cypress/screenshots
+cypress/testFolder
 cypress/videos
+/runner-results
+mochawesome-general.json
+mochawesome-report
+results
+snapshots
+
