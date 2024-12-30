@@ -9,18 +9,21 @@ on:
 
 jobs:
   cypress-tests:
-    name: 'Cypress config tests'
-    needs: test-cypress-custom
-    runs-on: ubuntu-latest
+    name: 'Cypress default config tests',
+    needs: test-cypress-custom,
+    runs-on: ubuntu-latest,
     container:
       image: cypress/browsers:latest
       options: --user 1001
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Install dependecies
         run: npm ci
+
       - name: Run Cypress default command tests
         uses: cypress-io/github-action@v6
         with:
-          browser: chrome
-
+            browser: chrome
