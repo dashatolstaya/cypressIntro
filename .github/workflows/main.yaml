@@ -1,0 +1,27 @@
+name: Run Cypress Tests in Docker
+
+on:
+  push:
+    branches:
+      - "*"
+  pull_request:
+    types: ['opened']
+
+jobs:
+  cypress-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run Cypress tests
+        uses: addnab/docker-run-action@v3
+        with:
+          image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
+          options: >
+            -v ${{ github.workspace }}:/e2e
+            -w /e2e/cypress
+          run: |
+            npm install
+            npx cypress run

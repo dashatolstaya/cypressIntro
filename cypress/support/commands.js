@@ -17,4 +17,18 @@ Cypress.Commands.overwrite('type', (originalFn, element, text, options) => {
     }
 
     return originalFn(element, text, options)
-})
+});
+
+Cypress.Commands.add('createExpense', (authCookie, carId, expenseData) => {
+    return cy.request({
+        method: 'POST',
+        url: 'https://qauto.forstudy.space/api/expenses',
+        headers: {
+            Cookie: authCookie,
+        },
+        body: {
+            carId: carId,
+            ...expenseData,
+        },
+    });
+});
