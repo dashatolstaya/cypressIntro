@@ -5,13 +5,13 @@ on:
     branches:
       - "*"
   pull_request:
-    types: ['opened']
+    types:
+      - opened
 
 jobs:
   cypress-tests:
-    name: 'Cypress default config tests',
-    needs: test-cypress-custom,
-    runs-on: ubuntu-latest,
+    name: 'Cypress default config tests'
+    runs-on: ubuntu-latest
     container:
       image: cypress/browsers:latest
       options: --user 1001
@@ -20,10 +20,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install dependecies
+      - name: Install dependencies
         run: npm ci
 
       - name: Run Cypress default command tests
         uses: cypress-io/github-action@v6
         with:
-            browser: chrome
+          browser: chrome
