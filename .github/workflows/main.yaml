@@ -9,19 +9,17 @@ on:
 
 jobs:
   cypress-tests:
+    name: 'Cypress default config tests'
+    needs: test-cypress-custom
     runs-on: ubuntu-latest
-
+    container:
+      image: cypress/browsers:latest
+      options: --user 1001
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Run Cypress tests
-        uses: addnab/docker-run-action@v3
+      - uses: actions/checkout@v3
+      - name: Install dependecies
+        run: npm ci
+      - name: Run Cypress default command tests
+        uses: cypress-io/github-action@v6
         with:
-          image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
-          options: >
-            -v ${{ github.workspace }}:/e2e
-            -w /e2e/cypress
-          run: |
-            npm install
-            npx cypress run
+          browser: firefox
