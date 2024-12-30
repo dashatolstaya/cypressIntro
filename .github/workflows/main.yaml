@@ -24,4 +24,4 @@ jobs:
             -w /e2e/cypress
           run: |
             npm install
-            npx cypress run --config-file ../cypress.config.js
+            npx cypress run
