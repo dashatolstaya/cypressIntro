@@ -1,4 +1,13 @@
 describe('Verify header and footer buttons ', () => {
+    beforeEach(() => {
+
+        cy.visit('https://qauto.forstudy.space/', {
+            auth: {
+                username: 'guest',
+                password: 'welcome2qauto'
+            }
+        })
+    });
 
     it('Finding all buttons in the header', () => {
         cy.get('header button').each((button, index) => {
